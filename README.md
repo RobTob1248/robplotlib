@@ -1,5 +1,3 @@
-#
-
 This module is a matplotlib-inspired library for micropython.
 
 THIS IS **NOT** A PORT OF MATPLOTLIB
@@ -189,7 +187,5 @@ class Line:
 
 class Color:
 	this is really just a bunch of unicode squares with ANSI colors
-
-
-#
+	
 	currently, defined colors are BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, and GRAY
