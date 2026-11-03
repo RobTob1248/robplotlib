@@ -107,16 +107,16 @@ class Board:
        
         if m == Math.UNDEFINED:
             for i in range(-self.OFFSET, self.OFFSET+1):
-                self.point([a, i*self.scale], char)
+                self.point([a, i/self.scale], char)
            
             return
        
         for x in range(-self.OFFSET, self.OFFSET+1):
-            self.point([x*self.scale, line.get_y(x*self.scale)], char)
+            self.point([x/self.scale, line.get_y(x/self.scale)], char)
        
         for y in range(-self.OFFSET, self.OFFSET+1):
             if m != 0:
-                self.point([line.get_x(y*self.scale), y*self.scale], char)
+                self.point([line.get_x(y/self.scale), y/self.scale], char)
            
 
 class Math:
@@ -161,6 +161,23 @@ class Math:
 
     def dist(p1, p2):
         return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+    
+    def midpoint(p1, p2):
+        return [(p1[0]+p2[0])/2, (p1[1]+p2[1])/2]
+
+    def circumcenter(p1, p2, p3):
+        line1 = Line(p2, p3)
+        line2 = Line(p1, p3)
+        
+        mid1 = Math.midpoint(p2, p3)
+        mid2 = Math.midpoint(p1, p3)
+        
+        bis1 = Line(mid1, -1/line1.m)
+        bis2 = Line(mid2, -1/line2.m)
+        
+        center = Math.intersect(bis1, bis2)
+        
+        return center
 
     def intersect(line1, line2):
         if line1.m == line2.m and line1.b == line2.b and line1.a == line2.a:
@@ -175,7 +192,7 @@ class Math:
            
             return [x, y]
        
-        if line2.m is Math.UNEDFINED:
+        if line2.m is Math.UNDEFINED:
             x = line2.a
             y = x * line1.m + line1.b
            
@@ -250,6 +267,40 @@ class Line:
        
         else:
             return round(y) == round(self.m * x + self.b)
+
+class Circle:
+    def __init__(self, *args):
+        if len(args) == 3:
+            self.center = Math.circumcenter(*args)
+            self.radius = Math.dist(self.center, args[0])
+        
+        else:
+            if isinstance(args[1], list):
+                self.center = args[0]
+                self.radius = Math.dist(self.center, args[1])
+            
+            else:
+                self.center = args[0]
+                self.radius = args[1]
+        
+        self.diameter = self.radius * 2
+        
+        self.points = []
+        
+        print(list(range(round(-self.radius+self.center[0]), round(self.radius+1+self.center[0]))))
+        print(list(range(round(-self.radius+self.center[1]), round(self.radius+1+self.center[1]))))
+    
+        for x in range(round(-self.radius+self.center[0]), round(self.radius+1+self.center[0])):
+            for y in range(round(-self.radius+self.center[1]), round(self.radius+1+self.center[1])):
+                if round(Math.dist([x, y], self.center)) == round(self.radius):
+                    self.points.append([x, y])
+    
+    def get_point(self, angle):
+        point = Math.cord([angle, self.radius])
+        point[0] += self.center[0]
+        point[1] += self.center[1]
+        
+        return point
 
 class Color:
     BLACK = "\033[30m\u25A0\033[0m"
