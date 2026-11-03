@@ -157,7 +157,7 @@ class Math:
 
 
 	def intersect(line1, line2):
-		returns at which point line1 and line2 intersect. If they do not intersect, it returns Math.NO_SOLUTIONS. If they are the same line, it returns Math.ALL_READ_NUMBERS.
+		returns at which point line1 and line2 intersect. If they do not intersect, it returns Math.NO_SOLUTIONS. If they are the same line, it returns Math.ALL_REAL_NUMBERS.
 
 		both line1 and line2 must be of the Line type, defined below.
 
