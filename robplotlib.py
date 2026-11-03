@@ -163,8 +163,11 @@ class Math:
         return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
 
     def intersect(line1, line2):
+        if line1.m == line2.m and line1.b == line2.b and line1.a == line2.a:
+            return Math.ALL_REAL_NUMBERS
+        
         if line1.m == line2.m:
-            return
+            return Math.NO_SOLUTIONS
        
         if line1.m is Math.UNDEFINED:
             x = line1.a
