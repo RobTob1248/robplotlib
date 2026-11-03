@@ -6,7 +6,7 @@ This library uses its own graphing system that is completely unnafiliated with m
 
 THE DOCS:
 
-**class Board:
+class Board:
 	this is the class used to display points and lines using the shell.
 
 
@@ -187,5 +187,5 @@ class Line:
 
 class Color:
 	this is really just a bunch of unicode squares with ANSI colors
-	**
+	
 	currently, defined colors are BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, and GRAY
