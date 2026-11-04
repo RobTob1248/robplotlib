@@ -164,6 +164,13 @@ class Math:
     
     def midpoint(p1, p2):
         return [(p1[0]+p2[0])/2, (p1[1]+p2[1])/2]
+    
+    def rotate(old, angle, center = [0, 0]):
+        old = [old[0]-center[0], old[1]-center[1]]
+        new = [old[0]*Math.cos(angle) - old[1]*Math.sin(angle), old[0]*Math.sin(angle) + old[1]*Math.cos(angle)]
+        new = [new[0]+center[0], new[1]+center[1]]
+        
+        return new
 
     def circumcenter(p1, p2, p3):
         line1 = Line(p2, p3)
@@ -311,3 +318,5 @@ class Color:
     PURPLE = "\033[35m\u25A0\033[0m"
     CYAN = "\033[36m\u25A0\033[0m"
     GRAY = "\033[37m\u25A0\033[0m"
+
+
